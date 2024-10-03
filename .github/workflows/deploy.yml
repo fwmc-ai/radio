@@ -14,23 +14,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Inject Firebase config into HTML
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Obfuscate Firebase config
         run: |
-          sed -i '/<head>/a \
-          <script>\
-          window.firebaseConfig = {\
-            apiKey: "${{ secrets.FIREBASE_API_KEY }}",\
-            authDomain: "${{ secrets.FIREBASE_AUTH_DOMAIN }}",\
-            projectId: "${{ secrets.FIREBASE_PROJECT_ID }}",\
-            storageBucket: "${{ secrets.FIREBASE_STORAGE_BUCKET }}",\
-            messagingSenderId: "${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}",\
-            appId: "${{ secrets.FIREBASE_APP_ID }}",\
-            measurementId: "${{ secrets.FIREBASE_MEASUREMENT_ID }}",\
-            databaseURL: "${{ secrets.FIREBASE_DATABASE_URL }}"\
-          };\
-          </script>' index.html
-          echo "Firebase config injected into HTML"
-          grep -n firebaseConfig index.html
+          echo "const firebaseConfig = {
+            apiKey: '${{ secrets.FIREBASE_API_KEY }}',
+            authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
+            projectId: '${{ secrets.FIREBASE_PROJECT_ID }}',
+            storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}',
+            messagingSenderId: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}',
+            appId: '${{ secrets.FIREBASE_APP_ID }}',
+            measurementId: '${{ secrets.FIREBASE_MEASUREMENT_ID }}',
+            databaseURL: '${{ secrets.FIREBASE_DATABASE_URL }}'
+          };" > temp-config.js
+          node -e "
+          const fs = require('fs');
+          const { encodeConfig } = require('./firebase-config-obfuscator.js');
+          const tempConfig = require('./temp-config.js');
+          const obfuscatedConfig = encodeConfig(tempConfig);
+          fs.writeFileSync('obfuscated-config.js', 'window.obfuscatedFirebaseConfig = \"' + obfuscatedConfig + '\";');
+          fs.unlinkSync('./temp-config.js');
+          "
+
+          - name: Inject obfuscated Firebase config into HTML
+          run: |
+            sed -i '/<head>/r obfuscated-config.js' index.html
+            sed -i '/<head>/a <script src="utils.js"></script>' index.html
+            rm obfuscated-config.js
+            grep -q "window.obfuscatedFirebaseConfig" index.html || (echo "Obfuscated config not injected properly" && exit 1)
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
