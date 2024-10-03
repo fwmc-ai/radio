@@ -22,10 +22,19 @@ function encodeConfig(config) {
   const salt = 'FWMC-AI-RADIO-SALT';
   const secret = 'YOUR-SECRET-KEY';
   const xorResult = xorCipher(jsonString, salt, secret);
-  return btoa(xorResult)
-    .replace(/=/g, '')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_');
+  if (typeof btoa === 'function') {
+    // Browser environment
+    return btoa(xorResult)
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+  } else {
+    // Node.js environment
+    return Buffer.from(xorResult).toString('base64')
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+  }
 }
 
 function decodeConfig(encodedConfig) {
