@@ -46,7 +46,7 @@ jobs:
       
       - name: Inject obfuscated Firebase config into HTML
         run: |
-          sed -i '/<head>/r obfuscated-config.js' index.html
+          sed -i '/<head>/a <script>'"$(<obfuscated-config.js)"'</script>' index.html
           sed -i '/<head>/a <script src="utils.js"></script>' index.html
           rm obfuscated-config.js
           grep -q "window.obfuscatedFirebaseConfig" index.html || (echo "Obfuscated config not injected properly" && exit 1)
