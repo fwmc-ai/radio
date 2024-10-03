@@ -3,7 +3,13 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.2]
+FIXES
+Security update.
+
+
 [1.3.1]
+FIXES
 Security update.
 
 
