@@ -37,7 +37,7 @@ jobs:
           };" > temp-config.js
           node -e "
           const fs = require('fs');
-          const { encodeConfig } = require('./firebase-config-obfuscator.js');
+          const { encodeConfig } = require('./utils.js');
           const tempConfig = require('./temp-config.js');
           const obfuscatedConfig = encodeConfig(tempConfig);
           fs.writeFileSync('obfuscated-config.js', 'window.obfuscatedFirebaseConfig = \"' + obfuscatedConfig + '\";');
