@@ -43,13 +43,13 @@ jobs:
           fs.writeFileSync('obfuscated-config.js', 'window.obfuscatedFirebaseConfig = \"' + obfuscatedConfig + '\";');
           fs.unlinkSync('./temp-config.js');
           "
-
-          - name: Inject obfuscated Firebase config into HTML
-          run: |
-            sed -i '/<head>/r obfuscated-config.js' index.html
-            sed -i '/<head>/a <script src="utils.js"></script>' index.html
-            rm obfuscated-config.js
-            grep -q "window.obfuscatedFirebaseConfig" index.html || (echo "Obfuscated config not injected properly" && exit 1)
+      
+      - name: Inject obfuscated Firebase config into HTML
+        run: |
+          sed -i '/<head>/r obfuscated-config.js' index.html
+          sed -i '/<head>/a <script src="utils.js"></script>' index.html
+          rm obfuscated-config.js
+          grep -q "window.obfuscatedFirebaseConfig" index.html || (echo "Obfuscated config not injected properly" && exit 1)
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
