@@ -3,16 +3,20 @@
   <head>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="utils.js"></script>
+    <script>
+      window.obfuscatedFirebaseConfig = "ZDt7ZG1cdwwqNzguWQ95dGpWa-V-fPIaUfTaVlp6cuVrL2g5U3xbTD9kUQZaBF9lUSIEoRB68V5M1vZIfERaoyU7fGNpdD8UYSBoDnQcdwpyYlajVHL2T0bz6kB8XUSvfHZ3Nig1YgdnZ38MZDx8BSkwQPpfeKlLTb_rRHlEW6x-aWo2KDVhAWd_ewh1N21EeHdSrwg54l1J8bREdABG4HtwdTllZ2JbaX1qHGAabAlwfUuvHjnpT1fh-EJ0Q1PSend-cXZedlcyLytcJEMvHyUjHrkAKqYGBvPpVVRJFrs9KCAlNyMkQjA7K1ckRykdZHdEt1N65RkVpKERf0sGsCZ8fCc9JncWP244QzIYfUZgZ1ToX37qXm32ux8_ahnPK1otR1NaRSUwLzZNdBRsRnFzVehnScgIHrDxUWldR7swNnxjaXQ_FGEgaA50HHcKcmJWoFZ-4ktR_u0Ib1lQ4zF_c2ZhdXMGbWR1QXMadQVu";
+    </script>
     <meta charset="UTF-8" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.2" />
+    <link rel="manifest" href="./manifest.json?v=1.3.23" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.2"
+      href="./icon-192x192.png?v=1.3.23"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.2" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.23" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="theme-color" content="#3498db" />
@@ -2101,7 +2105,9 @@
     </noscript>
 
     <script>
+      const isDevelopment = false; // Set this to true for local testing
       console.log("Script is running");
+      if (isDevelopment) console.log("Obfuscated config exists:", !!window.obfuscatedFirebaseConfig);
 
       // Version Check
       function checkVersion() {
@@ -2148,7 +2154,7 @@
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.2";
+        const version = localStorage.getItem("appVersion") || "1.3.23";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2160,58 +2166,69 @@
         });
       }
 
-      // Your Firebase configuration
-      const firebaseConfig = window.firebaseConfig;
-      if (!firebaseConfig) {
-        console.error(
-          "Firebase configuration is missing. Make sure firebase-config.js is loaded correctly."
-        );
-      }
+// Firebase initialization
+(function initializeFirebase() {
+  console.log('Attempting to initialize Firebase...');
+  
+  if (!window.obfuscatedFirebaseConfig) {
+    console.error("Obfuscated Firebase config not found");
+    return;
+  }
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
+  if (!window.decodeAppConfig) {
+    console.error("decodeAppConfig function not found");
+    return;
+  }
 
-      // Try to enable offline persistence, but don't fail if it's not available
-      if (firebase.database.Persistence) {
-        firebase
-          .database()
-          .setPersistence(firebase.database.Persistence.LOCAL)
-          .then(() => {
-            console.log("Offline persistence enabled");
-          })
-          .catch((error) => {
-            console.warn("Offline persistence not available:", error.message);
-          });
-      } else {
-        console.warn(
-          "Offline persistence is not available in this environment"
-        );
-      }
+  if (window.firebaseInitialized) {
+    console.log('Firebase already initialized');
+    return;
+  }
 
-      // Explicitly connect to Firebase servers
-      firebase.database().goOnline();
+  try {
+    const decodedConfig = window.decodeAppConfig(window.obfuscatedFirebaseConfig);
+    console.log('Firebase config loaded successfully');
 
-      // Check connection status
-      const connectedRef = database.ref(".info/connected");
-      connectedRef.on("value", (snap) => {
-        if (snap.val() === true) {
-          console.log("Connected to Firebase");
-        } else {
-          console.log("Disconnected from Firebase");
-        }
-      });
+    if (!firebase.apps.length) {
+      firebase.initializeApp(decodedConfig);
+      window.firebaseInitialized = true;
+      console.log('Firebase initialized successfully');
+    } else {
+      console.log('Firebase app already exists');
+    }
 
-      // Handle connection state changes
-      database.ref(".info/connected").on("value", (snapshot) => {
-        if (snapshot.val() === false) {
-          // Handle offline state
-          console.log("App is offline");
-        } else {
-          // Handle online state
-          console.log("App is online");
-        }
-      });
+    window.database = firebase.database();
+    console.log('Firebase database reference created');
+
+    // Try to enable offline persistence
+    if (firebase.database.Persistence) {
+      firebase.database()
+        .setPersistence(firebase.database.Persistence.LOCAL)
+        .then(() => console.log('Offline persistence enabled'))
+        .catch((error) => console.warn('Failed to enable offline persistence:', error));
+    } else {
+      console.warn('Firebase database Persistence not available');
+    }
+
+    // Explicitly connect to Firebase servers
+    firebase.database().goOnline();
+    console.log('Explicitly connected to Firebase servers');
+
+    // Check connection status
+    const connectedRef = window.database.ref(".info/connected");
+    connectedRef.on("value", (snap) => {
+      console.log('Connection status:', snap.val() ? 'connected' : 'disconnected');
+    });
+
+    // Handle connection state changes
+    window.database.ref(".info/connected").on("value", (snapshot) => {
+      console.log(snapshot.val() ? "App is online" : "App is offline");
+    });
+
+  } catch (error) {
+    console.error("Error during Firebase initialization:", error);
+  }
+})();
 
       // Playlist and audio player setup
       const playlist = [
@@ -7065,4 +7082,3 @@ function hideLyrics() {
     </script>
   </body>
 </html>
-
