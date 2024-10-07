@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.3]
+ADDED
+
+Normal lyrics for every song currently on the site/app have been populated.
+
+*new song* kiara takanashi - vanished (crystal castles | ai cover)
+
+
 [1.3.2]
 FIXES
 Security update.

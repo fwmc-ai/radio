@@ -9,14 +9,14 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.23" />
+    <link rel="manifest" href="./manifest.json?v=1.3.3" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.23"
+      href="./icon-192x192.png?v=1.3.3"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.23" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.3" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="theme-color" content="#3498db" />
@@ -44,7 +44,7 @@
       :root {
         --primary-color: #3498db;
         --secondary-color: #2ecc71;
-        --background-color: linear-gradient(135deg, #add8e6, #e6e6fa);
+        --background-color: linear-gradient(135deg, #add8e6, #fae6f2);
         --text-color: #2c3e50;
         --white: #ffffff;
         --gray: #bdc3c7;
@@ -1790,7 +1790,6 @@
   #lyricsContainer {
     max-height: 40vh;
   }
-
 }
 
     </style>
@@ -2154,7 +2153,7 @@
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.23";
+        const version = localStorage.getItem("appVersion") || "1.3.3";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2235,6 +2234,16 @@
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
         {
+          id: "vanished",
+          title: "kiara takanshi - vanished (crystal castles, van she | ai cover)",
+          file: "./audio/vanished.mp3",
+          cover: "./images/vanished.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/vanished.txt",
+        },
+
+        {
           id: "selfcontrol",
           title: "holomyth - self control (frank ocean, annie dang | ai cover)",
           file: "./audio/selfcontrol.mp3",
@@ -2313,6 +2322,8 @@
           cover: "./images/dieforparty.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/diefortheparty.txt",
+          syncedLyrics: "./lyrics/diefortheparty-synced.txt",
         },
         {
           id: "dirt",
@@ -2321,6 +2332,7 @@
           cover: "./images/dirt.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/dirt.txt",
         },
         {
           id: "dearmama",
@@ -2329,6 +2341,7 @@
           cover: "./images/dearmama.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/dearmama.txt",
         },
         {
           id: "beam",
@@ -2338,6 +2351,7 @@
           cover: "./images/beam.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/beam.txt",
         },
         {
           id: "anacondas",
@@ -2347,6 +2361,7 @@
           cover: "./images/anacondas.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/anacondas.txt",
         },
         {
           id: "lastnightfuwa",
@@ -2356,6 +2371,7 @@
           cover: "./images/lastnight.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/lastnight.txt",
         },
         {
           id: "todaysmashingpumpkins",
@@ -2365,6 +2381,7 @@
           cover: "./images/today.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/today.txt",
         },
         {
           id: "wakemeupsept",
@@ -2374,6 +2391,7 @@
           cover: "./images/wakemeupsept.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/wakemeupsept.txt",
         },
         {
           id: "agorahills",
@@ -2382,6 +2400,7 @@
           cover: "./images/agorahills.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/agorahills.txt",
         },
         {
           id: "allred",
@@ -2390,6 +2409,7 @@
           cover: "./images/allred.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/allred.txt",
         },
         {
           id: "watchtheparty",
@@ -2398,6 +2418,7 @@
           cover: "./images/watchtheparty.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/watchtheparty.txt",
         },
         {
           id: "seeyouagain",
@@ -2407,6 +2428,7 @@
           cover: "./images/seeyouagain.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/seeyouagain.txt",
         },
         {
           id: "lithonia",
@@ -2415,6 +2437,7 @@
           cover: "./images/lithonia.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/lithonia.txt",
         },
         {
           id: "allthestars",
@@ -2424,6 +2447,7 @@
           cover: "./images/allthestars.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/allthestars.txt",
         },
         {
           id: "crush",
@@ -2432,6 +2456,7 @@
           cover: "./images/crush.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/crush.txt",
         },
         {
           id: "bestperson",
@@ -2441,6 +2466,7 @@
           cover: "./images/bestperson.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/bestperson.txt",
         },
         {
           id: "goosebumps",
@@ -2450,15 +2476,17 @@
           cover: "./images/goosebumps.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/goosebumps.txt",
         },
         {
           id: "daynnite",
           title:
-            "gawr gura, mococo abyssgard, elizabeth rose bloodflame - day 'n' nite (kid cudi | ai cover)",
+            "gawr gura, mococo abyssgard, elizabeth rose bloodflame - day 'n' nite (kid cudi, l-fresh the lion | ai cover)",
           file: "./audio/daynnite.mp3",
           cover: "./images/daynnite.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/daynnite.txt",
         },
         {
           id: "turks",
@@ -2468,6 +2496,7 @@
           cover: "./images/turks.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/turks.txt",
         },
         {
           id: "fwmctinydesk",
@@ -2476,6 +2505,7 @@
           cover: "./images/fwmctinydesk.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/fwmctinydesk.txt",
         },
         {
           id: "chaseudown",
@@ -2484,6 +2514,7 @@
           cover: "./images/chaseudown.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/chaseudown.txt",
         },
         {
           id: "betterhavemymoney",
@@ -2493,6 +2524,7 @@
           cover: "./images/betterhavemymoney.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/betterhavemymoney.txt",
         },
         {
           id: "alreadyrich",
@@ -2501,6 +2533,7 @@
           cover: "./images/alreadyrich.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/alreadyrich.txt",
         },
         {
           id: "jusdiss",
@@ -2509,6 +2542,7 @@
           cover: "./images/jusdiss.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/jusdiss.txt",
         },
         {
           id: "sugasuga",
@@ -2518,6 +2552,7 @@
           cover: "./images/sugasuga.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/sugasuga.txt",
         },
         {
           id: "freegura",
@@ -2526,6 +2561,8 @@
           cover: "./images/freegura.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/freegura.txt",
+          syncedLyrics: "./lyrics/freegura-synced.txt",
         },
         {
           id: "616inla",
@@ -2534,6 +2571,7 @@
           cover: "./images/616inla.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/616inla.txt",
         },
         {
           id: "dontswitchnow",
@@ -2543,6 +2581,7 @@
           cover: "./images/dontswitchnow.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/dontswitchnow.txt",
         },
         {
           id: "institution",
@@ -2551,6 +2590,7 @@
           cover: "./images/institution.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/institution.txt",
         },
         {
           id: "7minutedrill",
@@ -2559,6 +2599,7 @@
           cover: "./images/7minutedrill.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/7minutedrill.txt",
         },
         {
           id: "stickseason",
@@ -2568,6 +2609,7 @@
           cover: "./images/stickseason.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/stickseason.txt",
         },
         {
           id: "houdini",
@@ -2576,6 +2618,7 @@
           cover: "./images/houdini.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/houdini.txt",
         },
         {
           id: "theholo",
@@ -2584,6 +2627,7 @@
           cover: "./images/theholo.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/theholo.txt",
         },
         {
           id: "thelondonv",
@@ -2593,6 +2637,7 @@
           cover: "./images/thelondonv.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/thelondon.txt",
         },
         {
           id: "thelondon",
@@ -2602,6 +2647,7 @@
           cover: "./images/thelondon.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/thelondon.txt",
         },
         {
           id: "pushups",
@@ -2610,6 +2656,7 @@
           cover: "./images/pushups.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/pushups.txt",
         },
         {
           id: "demondogs",
@@ -2618,6 +2665,7 @@
           cover: "./images/demondogs.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/demondogs.txt",
         },
         {
           id: "vick",
@@ -2626,6 +2674,7 @@
           cover: "./images/vick.jpg",
           plays: 0,
           category: "original",
+          lyrics: "./lyrics/vick.txt",
         },
         {
           id: "bblcalli",
@@ -2634,6 +2683,7 @@
           cover: "./images/bblcalli.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/bblcalli.txt",
         },
         {
           id: "shoota",
@@ -2643,6 +2693,7 @@
           cover: "./images/shoota.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/shoota.txt",
         },
         {
           id: "euphoria",
@@ -2651,6 +2702,7 @@
           cover: "./images/euphoria.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/euphoria.txt",
         },
         {
           id: "notlikeus",
@@ -2659,6 +2711,7 @@
           cover: "./images/notlikeus.png",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/notlikeus.txt",
         },
         {
           id: "sickomode",
@@ -2668,6 +2721,7 @@
           cover: "./images/sickomode.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/sickomode.txt",
         },
         {
           id: "sad",
@@ -2676,6 +2730,7 @@
           cover: "./images/sad.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/sad.txt",
         },
         {
           id: "justkeepgoin",
@@ -2684,6 +2739,7 @@
           cover: "./images/justkeepgoin.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/justkeepgoin.txt",
         },
         {
           id: "hatred",
@@ -2692,6 +2748,7 @@
           cover: "./images/hatred.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/hatred.txt",
         },
         {
           id: "likethat",
@@ -2701,6 +2758,7 @@
           cover: "./images/likethat.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/likethat.txt",
         },
         {
           id: "xotourllif3",
@@ -2709,15 +2767,17 @@
           cover: "./images/xotourllif3.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/xotourllif3.txt",
         },
         {
           id: "stay",
           title:
-            "nyanners, fuwamoco - stay (justin beiber, the kid laroi | ai cover)",
+            "nyatasha nyanners, fuwamoco - stay (justin beiber, the kid laroi | ai cover)",
           file: "./audio/stay.mp3",
           cover: "./images/stay.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/stay.txt",
         },
         {
           id: "acti",
@@ -2727,6 +2787,7 @@
           cover: "./images/acti.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/acti.txt",
         },
         {
           id: "shibuya",
@@ -2735,6 +2796,7 @@
           cover: "./images/shibuya.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/shibuya.txt",
         },
         {
           id: "nonstop",
@@ -2743,6 +2805,7 @@
           cover: "./images/nonstop.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/nonstop.txt",
         },
         {
           id: "plugwalk",
@@ -2751,6 +2814,7 @@
           cover: "./images/plugwalk.jpg",
           plays: 0,
           category: "cover",
+          lyrics: "./lyrics/plugwalk.txt",
         },
       ];
 
@@ -2806,16 +2870,7 @@
       const playerContent = document.querySelector(".player-content");
       const backToMainBtn = document.getElementById("backToMainBtn");
       const newSongs = [
-        "dirt",
-        "dearmama",
-        "bautothebone",
-        "bubbly",
-        "dieforparty",
-        "airplanept2",
-        "saveme",
-        "needafavor",
-        "selfcontrol",
-        "pinkwhite",
+        "vanished",
       ];
       const turtleSongs = [
         "anacondas",
