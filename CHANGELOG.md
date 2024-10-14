@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.4]
+ADDED
+
+*new song* ironmouse, nanashi mumei, mococo abyssgard - love you more (earthgang, t-pain | ai cover)
+
+*new song* gawr gura - say so (doja cat | ai cover by saint)
+
+*new song* ouro kronii - die for you (the weeknd | ai cover by saint)
+
+
 [1.3.3]
 ADDED
 
