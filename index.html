@@ -10,14 +10,17 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.43" />
+    <link rel="manifest" href="./manifest.json?v=1.3.5" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.43"
+      href="./icon-192x192.png?v=1.3.5"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.43" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.5" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="theme-color" content="#3498db" />
@@ -40,6 +43,8 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    
+    
 
     <style>
       :root {
@@ -71,18 +76,37 @@
       }
 
       body {
-        font-family: "Roboto", sans-serif;
-        background: var(--background-color);
-        color: var(--text-color);
-        min-height: 100vh;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-bottom: 150px;
-      }
+    font-family: "Roboto", sans-serif;
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 150px;
+    position: relative;
+    overflow-x: hidden;
+}
 
-      h1 {
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        url('images/background-overlay.png'),
+        var(--background-color);
+    background-size: cover, auto;
+    background-position: center, 0 0;
+    background-repeat: no-repeat, repeat;
+    opacity: 0.3; /* Adjust this value to control the overlay intensity */
+    z-index: -1;
+    pointer-events: none;
+}
+
+      /*h1 {
         font-family: "Orbitron", sans-serif;
         font-size: 2.5rem;
         margin-bottom: 1.5rem;
@@ -90,7 +114,31 @@
         text-align: center;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         letter-spacing: 3px;
-      }
+      }*/
+
+      #mainHeader {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  #headerLogo {
+    max-width: 200%;
+    height: fit-content;
+    max-height: 200px;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    #headerLogo {
+      max-height: 120px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #headerLogo {
+      max-height: 100px;
+    }
+  }
 
       .playlist {
         display: grid;
@@ -102,21 +150,30 @@
       }
 
       .song {
-        display: flex; /* Added for flexbox layout */
-        flex-direction: column; /* Added for vertical arrangement */
-        align-items: center; /* Added for centering content */
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 15px;
-        padding: 1rem;
-        text-align: center;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(70, 130, 180, 0.2);
-        width: 100%;
-        max-width: 100%;
-        position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-        z-index: 1;
-      }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(70, 130, 180, 0.2);
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    z-index: 1;
+    height: 100%;
+}
+
+.song-info-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+}
 
       .song-tag {
         position: absolute;
@@ -168,10 +225,12 @@
       }
 
       .song-content {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-      }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+}
 
       .song-controls {
         display: flex;
@@ -182,6 +241,7 @@
       }
 
       .button-group {
+        margin-top: 0.5rem;
         display: flex;
         justify-content: center;
         gap: 0.5rem;
@@ -261,45 +321,164 @@
       }
 
       .song img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        aspect-ratio: 1 / 1;
-        border-radius: 10px;
-        margin-bottom: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-      .song p {
-        font-weight: bold;
-        color: var(--primary-color);
-        font-size: 0.9rem;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
+.song-title,
+.cover-artists,
+.original-artists {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0.1rem 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.song-title {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1rem;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    max-height: 2.4em;
+}
+
+.cover-artists {
+    font-size: 0.85rem;
+    color: #d1439b;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    max-height: 2.4em;
+}
+
+.original-artists {
+    font-size: 0.85rem;
+    color: #9064e2;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    max-height: 2.4em;
+}
+
+.play-count {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--secondary-color);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 320px) {
+    .song {
+        padding: 0.5rem;
+    }
+
+    .song-title {
+        font-size: 0.85rem;
         -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        width: 100%;
-        margin-bottom: 0.5rem; /* Add some space between title and play count */
-        flex-grow: 1; /* Allow title to take up available space */
-      }
+        max-height: 2.4em;
+    }
 
-      /* Desktop styles */
-      @media screen and (min-width: 1024px) {
-        .song p {
-          font-size: 0.8rem;
-          -webkit-line-clamp: 3;
-          line-clamp: 3;
-        }
-      }
+    .cover-artists,
+    .original-artists {
+        font-size: 0.7rem;
+        -webkit-line-clamp: 1;
+        max-height: 1.2em;
+    }
 
-      /* Larger desktop styles */
-      @media screen and (min-width: 1440px) {
-        .song p {
-          font-size: 0.75rem;
-        }
-      }
+    .play-count {
+        font-size: 0.6rem;
+        padding-top: 0.25rem;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+    .song {
+        padding: 0.75rem;
+    }
+
+    .song-title {
+        font-size: 0.9rem;
+    }
+
+    .cover-artists,
+    .original-artists {
+        font-size: 0.75rem;
+    }
+
+    .play-count {
+        font-size: 0.65rem;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .song {
+        padding: 0.75rem;
+    }
+
+    .song-title {
+        font-size: 0.95rem;
+    }
+
+    .cover-artists,
+    .original-artists {
+        font-size: 0.8rem;
+    }
+
+    .play-count {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .song {
+        padding: 0.75rem;
+    }
+
+    .song-title {
+        font-size: 1rem;
+    }
+
+    .cover-artists,
+    .original-artists {
+        font-size: 0.85rem;
+    }
+
+    .play-count {
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .song {
+        padding: 1rem;
+    }
+
+    .song-title {
+        font-size: 1.1rem;
+    }
+
+    .cover-artists,
+    .original-artists {
+        font-size: 0.9rem;
+    }
+
+    .play-count {
+        font-size: 0.8rem;
+    }
+}
 
       .player-container {
         position: fixed;
@@ -636,7 +815,7 @@
         flex-grow: 1;
         overflow-y: auto;
         padding: 0px;
-        padding-top: 0px; /* Reduced padding as header is now sticky */
+        padding-top: 0px;
       }
 
       .sidebar-content h2 {
@@ -647,7 +826,7 @@
       /* Ensure the content doesn't start under the header on mobile */
       @media (max-width: 768px) {
         .sidebar-content {
-          padding-top: 0px; /* Adjust this value based on your header height */
+          padding-top: 0px;
         }
       }
 
@@ -711,9 +890,81 @@
         font-weight: bold;
       }
 
+      @media (max-width: 320px) {
+  .playlist {
+    grid-template-columns: 1fr;
+  }
+
+  .song {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  .song img {
+    width: 60px;
+    height: 60px;
+    margin-right: 0.5rem;
+  }
+
+  .song-content {
+    flex: 1;
+  }
+
+  .song .cover-artists,
+  .song .song-title,
+  .song .original-artists {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 2.4em;
+  }
+
+  .play-count {
+    text-align: center;
+    padding: 0.25rem 0;
+  }
+}
+
+      @media (max-width: 480px) {
+        .playlist {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
+        }
+
+        .song {
+          padding: 0.5rem;
+        }
+
+        .song img {
+          width: 100%;
+          height: auto;
+        }
+
+    .song .song-title {
+    position: sticky;
+    font-size: 1rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 3em;
+  }
+
+  .song .cover-artists,
+  .song .original-artists {
+    position: sticky;
+    font-size: 0.75rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    max-height: 2.4em;
+  }
+
+  .play-count {
+    position: static
+  }
+}
+
       @media (max-width: 768px) {
         .playlist {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .playlist-sidebar {
@@ -738,57 +989,135 @@
         .btn {
           width: 100%;
         }
+
+  .song-title {
+    position: sticky;
+    font-size: 1rem;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    max-height: 2.4em;
+  }
+
+  .cover-artists {
+    position: sticky;
+    font-size: 0.85rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+
+  .original-artists {
+    position: sticky;
+    font-size: 0.75rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+
+  .play-count {
+    position: static;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+  }
       }
 
-      @media (max-width: 480px) {
-        .playlist {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 0.5rem;
-        }
+      /* Medium-sized desktop */
+  @media (min-width: 769px) and (max-width: 1024px) {
+  .playlist {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-        .song {
-          padding: 0.5rem;
-        }
+  .song {
+    padding: 0.5rem;
+  }
 
-        .song img {
-          width: 100%;
-          height: auto;
-        }
+  .song-content {
+    gap: 0.3rem;
+  }
 
-        .song p {
-          font-size: 0.8rem;
-          -webkit-line-clamp: 2;
-          line-clamp: 2;
-          max-height: 2.4em;
-        }
-      }
+  .song-title,
+  .cover-artists,
+  .original-artists {
+    position: sticky;
+    margin: 0.1rem 0;
+    line-height: 1;
+  }
 
-      @media (max-width: 320px) {
-        .playlist {
-          grid-template-columns: 1fr;
-        }
+  .song-title {
+    font-size: 1rem;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    max-height: 2em;
+  }
 
-        .song {
-          flex-direction: row;
-          align-items: center;
-          text-align: left;
-        }
+  .cover-artists,
+  .original-artists {
+    font-size: 0.80rem;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+  }
 
-        .song img {
-          width: 60px;
-          height: 60px;
-          margin-right: 0.5rem;
-          margin-bottom: 0;
-        }
+  .play-count {
+    position: static;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 0.80rem;
+    text-align: center;
+  }
+}
 
-        .song p {
-          flex: 1;
-          -webkit-line-clamp: 3;
-          line-clamp: 3;
-          max-height: 4em;
-        }
-      }
+/* Large desktop */
+@media (min-width: 1025px) {
+  .playlist {
+    grid-template-columns: repeat(5, 1fr);
+  }
 
+  .song {
+    padding: 0.5rem;
+  }
+
+  .song-content {
+    gap: 0.3rem;
+  }
+
+  .song-title {
+    position: sticky;
+    font-size: 1rem;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    max-height: 2.4em;
+  }
+
+  .cover-artists {
+    position: sticky;
+    font-size: 0.85rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+
+  .original-artists {
+    position: sticky;
+    font-size: 0.75rem;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+
+  .play-count {
+    position: static;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
+
+      
       /* Donate and Socials Modal Styles */
       .donate-modal {
         display: none;
@@ -1336,12 +1665,12 @@
       }
 
       /* Media queries for responsive adjustments */
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 320px) {
         #enterSiteBtn {
-          font-size: 1.1rem;
-          padding: 8px 16px;
-          max-width: 180px;
-          height: 40px;
+          font-size: 0.9rem;
+          padding: 6px 12px;
+          max-width: 140px;
+          height: 36px;
         }
       }
 
@@ -1354,12 +1683,12 @@
         }
       }
 
-      @media screen and (max-width: 320px) {
+      @media screen and (max-width: 768px) {
         #enterSiteBtn {
-          font-size: 0.9rem;
-          padding: 6px 12px;
-          max-width: 140px;
-          height: 36px;
+          font-size: 1.1rem;
+          padding: 8px 16px;
+          max-width: 180px;
+          height: 40px;
         }
       }
 
@@ -1466,23 +1795,25 @@
       }
 
       #totalPlayCountContainer {
-        padding: 5px;
-        display: block;
+        display: inline-block;
+        padding: 10px 20px;
         text-align: center;
-        margin: 5px auto 20px;
-        width: 90%;
-        max-width: 600px;
+        margin: 10px 0 20px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
       #totalPlayCount {
         font-family: "Orbitron", sans-serif;
         font-weight: 700;
+        text-shadow: 4px 4px 4px #cfcfcf;
         color: #3498db;
         letter-spacing: 0.05em;
-
-        /* Base size for desktop */
         font-size: 1.5rem;
         line-height: 1.3;
+        margin-bottom: 5px;
+        white-space: nowrap;
       }
 
       .ticker-transition {
@@ -1665,21 +1996,34 @@
       }
 
       #approximateUsers {
+        font-family: 'Roboto', sans-serif;
+        text-shadow: 2px 2px 2px #c7c7c7;
         display: block;
         font-size: 1rem;
         color: var(--primary-color);
         margin-top: 5px;
+        white-space: nowrap;
       }
 
       @media (max-width: 768px) {
+        #totalPlayCount {
+          font-size: 1.2rem;
+        }
         #approximateUsers {
           font-size: 0.9rem;
         }
       }
 
       @media (max-width: 480px) {
+        #totalPlayCount {
+          font-size: 1rem;
+        }
         #approximateUsers {
           font-size: 0.8rem;
+        }
+        #totalPlayCountContainer {
+          margin: 5px auto 15px;
+          padding: 8px 15px;
         }
       }
 
@@ -1793,6 +2137,13 @@
   }
 }
 
+.patrick-hand-sc-regular {
+  font-family: "Patrick Hand SC", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
     </style>
 
     <link
@@ -1814,7 +2165,9 @@
       <source src="./audio/app-open-sound.mp3" type="audio/mpeg" />
     </audio>
 
-    <h1 id="mainHeader" style="cursor: pointer">FWMC-AI RADIO</h1>
+    <header id="mainHeader" style="cursor: pointer">
+      <img src="./images/header-logo.png" alt="FWMC-AI RADIO" id="headerLogo">
+    </header>
     <div id="totalPlayCountContainer">
       <span id="totalPlayCount"></span>
       <span id="approximateUsers"></span>
@@ -2154,7 +2507,7 @@
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.43";
+        const version = localStorage.getItem("appVersion") || "1.3.5";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2235,8 +2588,38 @@
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
         {
+          id: "void",
+          title: "mococo abyssgard - void (juice wrld, fwmc-ai x leo_frixi collab)",
+          file: "./audio/void.mp3",
+          cover: "./images/void.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/void.txt",
+        },
+
+        {
+          id: "zeze",
+          title: "gawr gura, ironmouse, mococo abyssgard - zeze (travis scott, kodak black, offset)",
+          file: "./audio/zeze.mp3",
+          cover: "./images/zeze.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/zeze.txt",
+        },
+
+        {
+          id: "sugarcube",
+          title: "minato aqua - 一顆方糖懸滯的時間 [as the sugar cube floats, fleeting in time] (zhu juan, zenless zone zero)",
+          file: "./audio/sugarcube.mp3",
+          cover: "./images/sugarcube.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/sugarcube.txt",
+        },
+
+        {
           id: "dmpb",
-          title: "mori calliope - drugs, money, pussy & beer (yung gravy | ai cover) [explicit version]",
+          title: "mori calliope - drugs, money, pussy, & beer (yung gravy)",
           file: "./audio/DMPB.mp3",
           cover: "./images/dmpb.jpg",
           plays: 0,
@@ -2246,7 +2629,7 @@
 
         {
           id: "hbcd",
-          title: "koseki bijou, noko shikanoko - hugs, bunnies, cookies, & deer (yung gravy | ai cover) [clean version]",
+          title: "koseki bijou, noko shikanoko - hugs, bunnies, cookies, & deer (yung gravy)",
           file: "./audio/HBCD.mp3",
           cover: "./images/hbcd.jpg",
           plays: 0,
@@ -2256,7 +2639,7 @@
 
         {
           id: "sharksgottabite",
-          title: "gawr gura - shark's gotta bite (ellen joe - zenless zone zero | ai cover)",
+          title: "gawr gura - shark's gotta bite (ellen joe, zenless zone zero)",
           file: "./audio/sharksgottabite.mp3",
           cover: "./images/sharksgottabite.jpg",
           plays: 0,
@@ -2266,7 +2649,7 @@
 
         {
           id: "loveyoumore",
-          title: "ironmouse, nanashi mumei, mococo abyssgard - love you more (earthgang, t-pain | ai cover)",
+          title: "ironmouse, nanashi mumei, mococo abyssgard - love you more (earthgang, t-pain)",
           file: "./audio/loveyoumore.mp3",
           cover: "./images/loveyoumore.jpg",
           plays: 0,
@@ -2276,7 +2659,7 @@
 
         {
           id: "sayso",
-          title: "gawr gura - say so (doja cat | ai cover by saint)",
+          title: "gawr gura - say so (doja cat, cover by saint)",
           file: "./audio/sayso.mp3",
           cover: "./images/sayso.jpg",
           plays: 0,
@@ -2286,7 +2669,7 @@
 
         {
           id: "dieforyou",
-          title: "ouro kronii - die for you (the weeknd | ai cover by saint)",
+          title: "ouro kronii - die for you (the weeknd, cover by saint)",
           file: "./audio/dieforyou.mp3",
           cover: "./images/dieforyou.jpg",
           plays: 0,
@@ -2296,7 +2679,7 @@
 
         {
           id: "vanished",
-          title: "takanshi kiara - vanished (crystal castles, van she | ai cover)",
+          title: "takanshi kiara - vanished (crystal castles, van she)",
           file: "./audio/vanished.mp3",
           cover: "./images/vanished.jpg",
           plays: 0,
@@ -2306,7 +2689,7 @@
 
         {
           id: "selfcontrol",
-          title: "holomyth - self control (frank ocean, annie dang | ai cover)",
+          title: "holomyth - self control (frank ocean, annie dang)",
           file: "./audio/selfcontrol.mp3",
           cover: "./images/selfcontrol.jpg",
           plays: 0,
@@ -2316,7 +2699,7 @@
 
         {
           id: "pinkwhite",
-          title: "fuwamoco - pink + white (frank ocean, remi wolf | ai cover)",
+          title: "fuwamoco - pink + white (frank ocean, remi wolf)",
           file: "./audio/pinkwhite.mp3",
           cover: "./images/pinkwhite.jpg",
           plays: 0,
@@ -2328,7 +2711,7 @@
         {
           id: "needafavor",
           title:
-            "mori calliope - need a favor (jelly roll, brenna bone | ai cover)",
+            "mori calliope - need a favor (jelly roll, brenna bone)",
           file: "./audio/needafavor.mp3",
           cover: "./images/needafavor.jpg",
           plays: 0,
@@ -2338,7 +2721,7 @@
         {
           id: "saveme",
           title:
-            "takanashi kiara - save me (jelly roll, kearstin clark) | ai cover)",
+            "takanashi kiara - save me (jelly roll, kearstin clark)",
           file: "./audio/saveme.mp3",
           cover: "./images/saveme.jpg",
           plays: 0,
@@ -2348,7 +2731,7 @@
         {
           id: "bubbly",
           title:
-            "nanashi mumei, gawr gura, fuwamoco - bubbly (young thug, travis scott, drake | ai cover)",
+            "nanashi mumei, gawr gura, fuwamoco - bubbly (young thug, travis scott, drake)",
           file: "./audio/bubbly.mp3",
           cover: "./images/bubbly.jpg",
           plays: 0,
@@ -2358,7 +2741,7 @@
         {
           id: "bautothebone",
           title:
-            "fuwamoco - bau to the bone // feeling good (george thorogood, nina simone, gab lobo | ai cover + mashup)",
+            "fuwamoco - bau to the bone // feeling good (george thorogood, nina simone, gab lobo)",
           file: "./audio/bautothebone.mp3",
           cover: "./images/bautothebone.jpg",
           plays: 0,
@@ -2368,7 +2751,7 @@
         {
           id: "airplanept2",
           title:
-            "takanashi kiara - airplane pt. 2 (bts, shimmeringrain | ai cover | fwmc-ai x leo_frixi collab)",
+            "takanashi kiara - airplane pt. 2 (bts, shimmeringrain, fwmc-ai x leo_frixi collab)",
           file: "./audio/airplanept2.mp3",
           cover: "./images/airplanept2.jpg",
           plays: 0,
@@ -2378,7 +2761,7 @@
         },
         {
           id: "dieforparty",
-          title: "dokibird - die for the party (lecrae | ai cover | leo_frixi)",
+          title: "dokibird - die for the party (lecrae, cover by leo_frixi)",
           file: "./audio/dieforparty.mp3",
           cover: "./images/dieforparty.jpg",
           plays: 0,
@@ -2388,7 +2771,7 @@
         },
         {
           id: "dirt",
-          title: "gawr gura - dirt (bones | ai cover) ",
+          title: "gawr gura - dirt (bones) ",
           file: "./audio/dirt.mp3",
           cover: "./images/dirt.jpg",
           plays: 0,
@@ -2397,7 +2780,7 @@
         },
         {
           id: "dearmama",
-          title: "fuwamoco, koseki bijou - dear mama puppy (2pac | ai cover) ",
+          title: "fuwamoco, koseki bijou - dear mama puppy (2pac) ",
           file: "./audio/dearmama.mp3",
           cover: "./images/dearmama.jpg",
           plays: 0,
@@ -2407,7 +2790,7 @@
         {
           id: "beam",
           title:
-            "nanashi mumei, gawr gura, ironmouse, filian - beam (rich brian, playboi carti | ai cover) ",
+            "nanashi mumei, gawr gura, ironmouse, filian - beam (rich brian, playboi carti) ",
           file: "./audio/beam.mp3",
           cover: "./images/beam.jpg",
           plays: 0,
@@ -2417,7 +2800,7 @@
         {
           id: "anacondas",
           title:
-            "mococo abyssgard - anacondas (juice wrld | ai cover | fwmc-ai x leo_frixi collab) ",
+            "mococo abyssgard - anacondas (juice wrld, fwmc-ai x leo_frixi collab) ",
           file: "./audio/anacondas.mp3",
           cover: "./images/anacondas.jpg",
           plays: 0,
@@ -2427,7 +2810,7 @@
         {
           id: "lastnightfuwa",
           title:
-            "fuwawa abyssgard - last night (morgan wallen, carah | ai cover) ",
+            "fuwawa abyssgard - last night (morgan wallen, carah) ",
           file: "./audio/lastnight.mp3",
           cover: "./images/lastnight.jpg",
           plays: 0,
@@ -2437,7 +2820,7 @@
         {
           id: "todaysmashingpumpkins",
           title:
-            "watson amelia - today (smashing pumpkins, first to eleven | ai cover) ",
+            "watson amelia - today (smashing pumpkins, first to eleven) ",
           file: "./audio/today.mp3",
           cover: "./images/today.jpg",
           plays: 0,
@@ -2447,7 +2830,7 @@
         {
           id: "wakemeupsept",
           title:
-            "watson amelia - wake me up when september ends (green day, vivoree | ai cover) ",
+            "watson amelia - wake me up when september ends (green day, vivoree) ",
           file: "./audio/wakemeupsept.mp3",
           cover: "./images/wakemeupsept.jpg",
           plays: 0,
@@ -2456,7 +2839,7 @@
         },
         {
           id: "agorahills",
-          title: "fuwamoco - agora hills (doja cat | ai cover)",
+          title: "fuwamoco - agora hills (doja cat)",
           file: "./audio/agorahills.mp3",
           cover: "./images/agorahills.jpg",
           plays: 0,
@@ -2465,7 +2848,7 @@
         },
         {
           id: "allred",
-          title: "nanashi mumei - all red (playboi carti | ai cover)",
+          title: "nanashi mumei - all red (playboi carti)",
           file: "./audio/allred.mp3",
           cover: "./images/allred.jpg",
           plays: 0,
@@ -2474,7 +2857,7 @@
         },
         {
           id: "watchtheparty",
-          title: "fuwamoco - watch the party die (kendrick lamar | ai cover)",
+          title: "fuwamoco - watch the party die (kendrick lamar)",
           file: "./audio/watchtheparty.mp3",
           cover: "./images/watchtheparty.jpg",
           plays: 0,
@@ -2484,7 +2867,7 @@
         {
           id: "seeyouagain",
           title:
-            "minato aqua, a-chan, mococo abyssgard, elizabeth rose bloodflame - see you again (wiz khalifa, charlieputh, chris brown, tyga | ai cover | fwmc-ai x leo_frixi collab)",
+            "minato aqua, a-chan, mococo abyssgard, elizabeth rose bloodflame - see you again (wiz khalifa, charlie puth, chris brown, tyga, fwmc-ai x leo_frixi collab)",
           file: "./audio/seeyouagain.mp3",
           cover: "./images/seeyouagain.jpg",
           plays: 0,
@@ -2493,7 +2876,7 @@
         },
         {
           id: "lithonia",
-          title: "filian - lithonia (childish gambino | ai cover)",
+          title: "filian - lithonia (childish gambino)",
           file: "./audio/lithonia.mp3",
           cover: "./images/lithonia.jpg",
           plays: 0,
@@ -2503,7 +2886,7 @@
         {
           id: "allthestars",
           title:
-            "shiori novella, fuwamoco - all the stars (sza, kendrick lamar, jorja smith | ai cover)",
+            "shiori novella, fuwamoco - all the stars (sza, kendrick lamar, jorja smith)",
           file: "./audio/allthestars.mp3",
           cover: "./images/allthestars.jpg",
           plays: 0,
@@ -2512,7 +2895,7 @@
         },
         {
           id: "crush",
-          title: "fuwamoco - crush (tessa violet | ai cover)",
+          title: "fuwamoco - crush (tessa violet)",
           file: "./audio/crush.mp3",
           cover: "./images/crush.jpg",
           plays: 0,
@@ -2522,7 +2905,7 @@
         {
           id: "bestperson",
           title:
-            "gawr gura, hakos baelz - best person you know // feral rat anthem (lowertown x hospital bracelets | ai cover + mashup)",
+            "gawr gura, hakos baelz - best person you know // feral rat anthem (lowertown x hospital bracelets)",
           file: "./audio/bestperson.mp3",
           cover: "./images/bestperson.jpg",
           plays: 0,
@@ -2532,7 +2915,7 @@
         {
           id: "goosebumps",
           title:
-            "gawr gura, fuwamoco - goosebumps (travis scott, kendrick lamar | ai cover)",
+            "gawr gura, fuwamoco - goosebumps (travis scott, kendrick lamar)",
           file: "./audio/goosebumps.mp3",
           cover: "./images/goosebumps.jpg",
           plays: 0,
@@ -2542,7 +2925,7 @@
         {
           id: "daynnite",
           title:
-            "gawr gura, mococo abyssgard, elizabeth rose bloodflame - day 'n' nite (kid cudi, l-fresh the lion | ai cover)",
+            "gawr gura, mococo abyssgard, elizabeth rose bloodflame - day 'n' nite (kid cudi, l-fresh the lion)",
           file: "./audio/daynnite.mp3",
           cover: "./images/daynnite.jpg",
           plays: 0,
@@ -2552,7 +2935,7 @@
         {
           id: "turks",
           title:
-            "fuwamoco, ironmouse, nanashi mumei, gawr gura - turks (nav, gunna, travis scott | ai cover)",
+            "fuwamoco, ironmouse, nanashi mumei, gawr gura - turks (nav, gunna, travis scott)",
           file: "./audio/turks.mp3",
           cover: "./images/turks.jpg",
           plays: 0,
@@ -2561,7 +2944,7 @@
         },
         {
           id: "fwmctinydesk",
-          title: "fuwamoco tiny desk (mac miller | ai cover)",
+          title: "fuwamoco - fwmc tiny desk (mac miller)",
           file: "./audio/fwmctinydesk.mp3",
           cover: "./images/fwmctinydesk.jpg",
           plays: 0,
@@ -2580,7 +2963,7 @@
         {
           id: "betterhavemymoney",
           title:
-            "fuwamoco - better have my money (rihanna, kelly clarkson | ai cover)",
+            "fuwamoco - better have my money (rihanna, kelly clarkson)",
           file: "./audio/betterhavemymoney.mp3",
           cover: "./images/betterhavemymoney.jpg",
           plays: 0,
@@ -2589,7 +2972,7 @@
         },
         {
           id: "alreadyrich",
-          title: "fuwamoco, gawr gura - already rich (yeat | ai cover)",
+          title: "fuwamoco, gawr gura - already rich (yeat)",
           file: "./audio/alreadyrich.mp3",
           cover: "./images/alreadyrich.jpg",
           plays: 0,
@@ -2608,7 +2991,7 @@
         {
           id: "sugasuga",
           title:
-            "senzawa, gawr gura - suga suga // sugar (baby bash & frankie j, robin schulz | ai cover)",
+            "senzawa, gawr gura - suga suga // sugar (baby bash & frankie j, robin schulz)",
           file: "./audio/sugasuga.mp3",
           cover: "./images/sugasuga.jpg",
           plays: 0,
@@ -2627,7 +3010,7 @@
         },
         {
           id: "616inla",
-          title: "fuwamoco - 6:16 in la (kendrick lamar | ai cover)",
+          title: "fuwamoco - 6:16 in la (kendrick lamar)",
           file: "./audio/616inla.mp3",
           cover: "./images/616inla.jpg",
           plays: 0,
@@ -2637,7 +3020,7 @@
         {
           id: "dontswitchnow",
           title:
-            "fuwamoco, koseki bijou - dont switch now // laced max (crack, lazer dim 700 | ai cover)",
+            "fuwamoco, koseki bijou - dont switch now // laced max (crack, lazer dim 700)",
           file: "./audio/dontswitchnow.mp3",
           cover: "./images/dontswitchnow.jpg",
           plays: 0,
@@ -2646,7 +3029,7 @@
         },
         {
           id: "institution",
-          title: "gawr gura - institution (kodak black | ai cover)",
+          title: "gawr gura - institution (kodak black)",
           file: "./audio/institution.mp3",
           cover: "./images/institution.jpg",
           plays: 0,
@@ -2655,7 +3038,7 @@
         },
         {
           id: "7minutedrill",
-          title: "gawr gura - 7 minute drill (j. cole | ai cover)",
+          title: "gawr gura - 7 minute drill (j. cole)",
           file: "./audio/7minutedrill.mp3",
           cover: "./images/7minutedrill.jpg",
           plays: 0,
@@ -2665,7 +3048,7 @@
         {
           id: "stickseason",
           title:
-            "gawr gura - stick season (noah kahan, olivia rodrigo | ai cover)",
+            "gawr gura - stick season (noah kahan, olivia rodrigo)",
           file: "./audio/stickseason.mp3",
           cover: "./images/stickseason.jpg",
           plays: 0,
@@ -2674,7 +3057,7 @@
         },
         {
           id: "houdini",
-          title: "mori calliope - houdini (eminem | ai cover)",
+          title: "mori calliope - houdini (eminem)",
           file: "./audio/houdini.mp3",
           cover: "./images/houdini.jpg",
           plays: 0,
@@ -2693,7 +3076,7 @@
         {
           id: "thelondonv",
           title:
-            "fuwamoco - the london (young thug, j. cole, travis scott | ai cover) [violin version]",
+            "fuwamoco - the london (young thug, j. cole, travis scott) [violin version]",
           file: "./audio/thelondonv.mp3",
           cover: "./images/thelondonv.jpg",
           plays: 0,
@@ -2703,7 +3086,7 @@
         {
           id: "thelondon",
           title:
-            "fuwamoco - the london (young thug, j. cole, travis scott | ai cover)",
+            "fuwamoco - the london (young thug, j. cole, travis scott)",
           file: "./audio/thelondon.mp3",
           cover: "./images/thelondon.jpg",
           plays: 0,
@@ -2712,7 +3095,7 @@
         },
         {
           id: "pushups",
-          title: "mori calliope, gawr gura - push ups (drake | ai cover)",
+          title: "mori calliope, gawr gura - push ups (drake)",
           file: "./audio/pushups.mp3",
           cover: "./images/pushups.jpg",
           plays: 0,
@@ -2739,7 +3122,7 @@
         },
         {
           id: "bblcalli",
-          title: "fuwamoco - BBL CALLI (metro boomin | ai cover)",
+          title: "fuwamoco - BBL CALLI (metro boomin)",
           file: "./audio/bblcalli.mp3",
           cover: "./images/bblcalli.jpg",
           plays: 0,
@@ -2749,7 +3132,7 @@
         {
           id: "shoota",
           title:
-            "gawr gura, fuwamoco - shoota (playboi carti, lil uzi vert | ai cover)",
+            "gawr gura, fuwamoco - shoota (playboi carti, lil uzi vert)",
           file: "./audio/shoota.mp3",
           cover: "./images/shoota.jpg",
           plays: 0,
@@ -2758,7 +3141,7 @@
         },
         {
           id: "euphoria",
-          title: "mococo abyssgard - euphoria (kendrick lamar | ai cover)",
+          title: "mococo abyssgard - euphoria (kendrick lamar)",
           file: "./audio/euphoria.mp3",
           cover: "./images/euphoria.jpg",
           plays: 0,
@@ -2767,7 +3150,7 @@
         },
         {
           id: "notlikeus",
-          title: "fuwamoco - not like us (kendrick lamar | ai cover)",
+          title: "fuwamoco - not like us (kendrick lamar)",
           file: "./audio/notlikeus.mp3",
           cover: "./images/notlikeus.png",
           plays: 0,
@@ -2777,7 +3160,7 @@
         {
           id: "sickomode",
           title:
-            "mococo abyssgard, gawr gura - sicko mode (travis scott, drake | ai cover)",
+            "mococo abyssgard, gawr gura - sicko mode (travis scott, drake)",
           file: "./audio/sickomode.mp3",
           cover: "./images/sickomode.jpg",
           plays: 0,
@@ -2786,7 +3169,7 @@
         },
         {
           id: "sad",
-          title: "fuwamoco - sad! (xxxtentacion | ai cover)",
+          title: "fuwamoco - sad! (xxxtentacion)",
           file: "./audio/sad.mp3",
           cover: "./images/sad.jpg",
           plays: 0,
@@ -2795,7 +3178,7 @@
         },
         {
           id: "justkeepgoin",
-          title: "mococo abyssgard - just keep goin' (tobi lou | ai cover)",
+          title: "mococo abyssgard - just keep goin' (tobi lou)",
           file: "./audio/justkeepgoin.mp3",
           cover: "./images/justkeepgoin.jpg",
           plays: 0,
@@ -2804,7 +3187,7 @@
         },
         {
           id: "hatred",
-          title: "fuwamoco - hatred (the kid laroi, lil yachty | ai cover)",
+          title: "fuwamoco - hatred (the kid laroi, lil yachty)",
           file: "./audio/hatred.mp3",
           cover: "./images/hatred.jpg",
           plays: 0,
@@ -2814,7 +3197,7 @@
         {
           id: "likethat",
           title:
-            "gawr gura, fuwamoco - like that (future, metro boomin, kendrick lamar | ai cover)",
+            "gawr gura, fuwamoco - like that (future, metro boomin, kendrick lamar)",
           file: "./audio/likethat.mp3",
           cover: "./images/likethat.jpg",
           plays: 0,
@@ -2823,7 +3206,7 @@
         },
         {
           id: "xotourllif3",
-          title: "fuwamoco - xo tour llif3 (lil uzi vert | ai cover)",
+          title: "fuwamoco - xo tour llif3 (lil uzi vert)",
           file: "./audio/xotourllif3.mp3",
           cover: "./images/xotourllif3.jpg",
           plays: 0,
@@ -2833,7 +3216,7 @@
         {
           id: "stay",
           title:
-            "nyatasha nyanners, fuwamoco - stay (justin beiber, the kid laroi | ai cover)",
+            "nyatasha nyanners, fuwamoco - stay (justin beiber, the kid laroi)",
           file: "./audio/stay.mp3",
           cover: "./images/stay.jpg",
           plays: 0,
@@ -2843,7 +3226,7 @@
         {
           id: "acti",
           title:
-            "gawr gura, fuwamoco - act i // act ii // act iii (4batz, drake | ai cover)",
+            "gawr gura, fuwamoco - act i // act ii // act iii (4batz, drake)",
           file: "./audio/acti.mp3",
           cover: "./images/acti.jpg",
           plays: 0,
@@ -2852,7 +3235,7 @@
         },
         {
           id: "shibuya",
-          title: "fuwamoco - shibuya (ski mask the slump god | ai cover)",
+          title: "fuwamoco - shibuya (ski mask the slump god)",
           file: "./audio/shibuya.mp3",
           cover: "./images/shibuya.jpg",
           plays: 0,
@@ -2861,7 +3244,7 @@
         },
         {
           id: "nonstop",
-          title: "fuwamoco - nonstop (drake | ai cover)",
+          title: "fuwamoco - nonstop (drake)",
           file: "./audio/nonstop.mp3",
           cover: "./images/nonstop.jpg",
           plays: 0,
@@ -2870,7 +3253,7 @@
         },
         {
           id: "plugwalk",
-          title: "fuwamoco - plug walk (rich the kid | ai cover)",
+          title: "fuwamoco - plug walk (rich the kid)",
           file: "./audio/plugwalk.mp3",
           cover: "./images/plugwalk.jpg",
           plays: 0,
@@ -2934,16 +3317,24 @@
         "sharksgottabite",
         "hbcd",
         "dmpb",
+        "sugarcube",
+        "zeze",
+        "void",
       ];
       const turtleSongs = [
         "anacondas",
         "seeyouagain",
         "dieforparty",
         "airplanept2",
+        "void",
       ];
       const saintSongs = [
         "dieforyou",
         "sayso",
+      ];
+      const zzzSongs = [
+        "sharksgottabite",
+        "sugarcube"
       ];
 
       function togglePlayer() {
@@ -3338,87 +3729,68 @@
 
       // Create and display the playlist
       function displayMainPlaylist(songs = currentPlaylist) {
-        console.log("Displaying main playlist with songs:", songs);
-        playlistElement.innerHTML = "";
+    console.log("Displaying main playlist with songs:", songs);
+    playlistElement.innerHTML = "";
 
-        const filteredSongs = songs.filter(
-          (song) => currentFilter === "all" || song.category === currentFilter
-        );
+    const filteredSongs = songs.filter(
+        (song) => currentFilter === "all" || song.category === currentFilter
+    );
 
-        const songElements = filteredSongs.map((song, index) => {
-          const songElement = document.createElement("div");
-          songElement.className = "song";
-          songElement.setAttribute("data-index", index);
-          songElement.setAttribute("data-id", song.id);
-          return { songElement, song };
-        });
+    const songElements = filteredSongs.map((song, index) => {
+        const songElement = document.createElement("div");
+        songElement.className = "song";
+        songElement.setAttribute("data-index", index);
+        songElement.setAttribute("data-id", song.id);
+        return { songElement, song };
+    });
 
-        songElements.forEach(({ songElement }) => {
-          playlistElement.appendChild(songElement);
-        });
+    songElements.forEach(({ songElement }) => {
+        playlistElement.appendChild(songElement);
+    });
 
-        songElements.forEach(({ songElement, song }, index) => {
-          getPlayCount(song.id).then((count) => {
+    songElements.forEach(({ songElement, song }, index) => {
+        getPlayCount(song.id).then((count) => {
+            const titleParts = song.title.split(' - ');
+            const coverArtists = titleParts[0];
+            const songTitle = titleParts[1].split(' (')[0];
+            const originalArtists = titleParts[1].split(' (')[1].replace(')', '');
+
             songElement.innerHTML = `
-                <div class="song-content">
-                    <img src="${song.cover}" alt="${
-              song.title
-            }" onerror="this.src='./images/default-cover.png'">
-                    ${
-                      newSongs.includes(song.id)
-                        ? '<span class="song-tag new-tag">NEW</span>'
-                        : ""
-                    }
-                    ${
-                      turtleSongs.includes(song.id)
-                        ? '<span class="song-tag turtle-tag">🐢</span>'
-                        : ""
-                    }
-                    ${
-                      saintSongs.includes(song.id)
-                        ? '<span class="song-tag turtle-tag">💮</span>'
-                        : ""
-                    }
-                    <p>${song.title}</p>
-                    <span class="play-count">Plays: 0</span>
-                </div>
-                <div class="song-controls">
-                    <div class="button-group">
-                        ${
-                          currentPlaylistName !== "main"
-                            ? `
-            <button class="move-btn move-left-btn" ${
-              index === 0 ? "disabled" : ""
-            }>&larr;</button>
-            <button class="move-btn move-right-btn" ${
-              index === songs.length - 1 ? "disabled" : ""
-            }>&rarr;</button>
-                        `
-                            : ""
-                        }
-                        ${
-                          isCustomPlaylistActive &&
-                          currentPlaylistName !== "search"
-                            ? `
-                            <button class="remove-from-playlist-btn" data-playlist="${currentPlaylistName}" data-index="${index}">Remove</button>
-                        `
-                            : `
-                            <button class="add-to-playlist-btn">Add to Playlist</button>
-                        `
-                        }
-                    </div>
-                </div>
-            `;
-          });
+    <div class="song-content">
+        <img src="${song.cover}" alt="${song.title}" onerror="this.src='./images/default-cover.png'">
+        ${newSongs.includes(song.id) ? '<span class="song-tag new-tag">NEW</span>' : ""}
+        ${turtleSongs.includes(song.id) ? '<span class="song-tag turtle-tag">🐢</span>' : ""}
+        ${saintSongs.includes(song.id) ? '<span class="song-tag turtle-tag">💮</span>' : ""}
+        ${zzzSongs.includes(song.id) ? '<span class="song-tag turtle-tag">💤</span>' : ""}
+        <div class="song-info-container">
+            <p class="song-title">${songTitle}</p>
+            <p class="cover-artists">${coverArtists}</p>
+            <p class="original-artists">${originalArtists}</p>
+            <span class="play-count">Plays: 0</span>
+        </div>
+    </div>
+    <div class="song-controls">
+        <div class="button-group">
+            ${currentPlaylistName !== "main" ?
+                `<button class="move-btn move-left-btn" ${index === 0 ? "disabled" : ""}>&larr;</button>
+                 <button class="move-btn move-right-btn" ${index === songs.length - 1 ? "disabled" : ""}>&rarr;</button>`
+            : ""}
+            ${isCustomPlaylistActive && currentPlaylistName !== "search" ?
+                `<button class="remove-from-playlist-btn" data-playlist="${currentPlaylistName}" data-index="${index}">Remove</button>`
+            : `<button class="add-to-playlist-btn">Add to Playlist</button>`}
+        </div>
+    </div>
+`;
         });
+    });
 
-        if (songs.length > 0) {
-          updateSongInfo(songs[0]);
-        }
+    if (songs.length > 0) {
+        updateSongInfo(songs[0]);
+    }
 
-        // Re-attach event listener for the playlist
-        playlistElement.addEventListener("click", handlePlaylistClick);
-      }
+    // Re-attach event listener for the playlist
+    playlistElement.addEventListener("click", handlePlaylistClick);
+}
 
       // Separate function for playlist click handling
       function handlePlaylistClick(e) {
@@ -3496,7 +3868,7 @@
             );
 
             setTimeout(() => {
-              totalPlayCountElement.textContent = `${count.toLocaleString()} plays and counting!`;
+              totalPlayCountElement.textContent = `Total Play Count: ${count.toLocaleString()}`;
               totalPlayCountElement.classList.remove("ticker-hidden");
             }, 500);
           }
@@ -4760,76 +5132,54 @@
 
       // Update current song information
       function updateSongInfo(song) {
-        const currentSongElement = document.getElementById("currentSong");
-        const scrollContainer = document.querySelector(".scroll-container");
+    const currentSongElement = document.getElementById("currentSong");
+    const scrollContainer = document.querySelector(".scroll-container");
 
-        // Always use the current playing song's info, considering the shuffle state
-        const currentPlayingSong = isShuffled
-          ? shuffledPlaylist[currentSongIndex]
-          : currentPlaylist[currentSongIndex];
-        currentSongElement.textContent = currentPlayingSong.title;
+    // Format the song information
+    const titleParts = song.title.split(' - ');
+    const coverArtists = titleParts[0];
+    const songTitle = titleParts[1].split(' (')[0];
+    const originalArtists = titleParts[1].split(' (')[1].replace(')', '');
+    const formattedTitle = `${coverArtists} - ${songTitle} (${originalArtists})`;
 
-        // Reset animation
-        currentSongElement.style.animation = "none";
-        currentSongElement.offsetHeight; // Trigger reflow
+    currentSongElement.textContent = formattedTitle;
 
-        // Check if scrolling is necessary
-        if (currentSongElement.offsetWidth > scrollContainer.offsetWidth) {
-          const scrollDistance =
-            currentSongElement.offsetWidth - scrollContainer.offsetWidth;
-          const duration = Math.max(10, scrollDistance * 0.03); // Adjust timing based on scroll distance
-          currentSongElement.style.animation = `marquee-scroll ${duration}s linear infinite`;
+    // Reset animation
+    currentSongElement.style.animation = "none";
+    currentSongElement.offsetHeight; // Trigger reflow
 
-          // Add a slight delay before starting the animation
-          setTimeout(() => {
+    // Check if scrolling is necessary
+    if (currentSongElement.offsetWidth > scrollContainer.offsetWidth) {
+        const scrollDistance = currentSongElement.offsetWidth - scrollContainer.offsetWidth;
+        const duration = Math.max(10, scrollDistance * 0.03); // Adjust timing based on scroll distance
+        currentSongElement.style.animation = `marquee-scroll ${duration}s linear infinite`;
+
+        // Add a slight delay before starting the animation
+        setTimeout(() => {
             currentSongElement.style.transform = "translateX(0)";
-          }, 100);
-        } else {
-          currentSongElement.style.animation = "none";
-          currentSongElement.style.transform = "translateX(0)";
-        }
+        }, 100);
+    } else {
+        currentSongElement.style.animation = "none";
+        currentSongElement.style.transform = "translateX(0)";
+    }
 
-        // Update media session metadata if available
-        if ("mediaSession" in navigator) {
-          navigator.mediaSession.metadata = new MediaMetadata({
-            title: currentPlayingSong.title,
-            artist: "FWMC-AI RADIO",
-            album: "AI Covers",
+    // Update media session metadata if available
+    if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: songTitle,
+            artist: coverArtists,
+            album: `Cover of ${originalArtists}`,
             artwork: [
-              {
-                src: currentPlayingSong.cover,
-                sizes: "96x96",
-                type: "image/png",
-              },
-              {
-                src: currentPlayingSong.cover,
-                sizes: "128x128",
-                type: "image/png",
-              },
-              {
-                src: currentPlayingSong.cover,
-                sizes: "192x192",
-                type: "image/png",
-              },
-              {
-                src: currentPlayingSong.cover,
-                sizes: "256x256",
-                type: "image/png",
-              },
-              {
-                src: currentPlayingSong.cover,
-                sizes: "384x384",
-                type: "image/png",
-              },
-              {
-                src: currentPlayingSong.cover,
-                sizes: "512x512",
-                type: "image/png",
-              },
+                { src: song.cover, sizes: "96x96", type: "image/png" },
+                { src: song.cover, sizes: "128x128", type: "image/png" },
+                { src: song.cover, sizes: "192x192", type: "image/png" },
+                { src: song.cover, sizes: "256x256", type: "image/png" },
+                { src: song.cover, sizes: "384x384", type: "image/png" },
+                { src: song.cover, sizes: "512x512", type: "image/png" },
             ],
-          });
-        }
-      }
+        });
+    }
+}
 
       // Update full playlist in sidebar
       function updateFullPlaylist() {
