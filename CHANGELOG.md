@@ -3,14 +3,62 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.5] 2024-10-20
+ADDED
+
+*new song* mococo abyssgard - void (juice wrld, fwmc-ai x leo_frixi collab)
+
+*new song* gawr gura, ironmouse, mococo abyssgard - zeze (travis scott, kodak black, offset)
+
+*new song* minato aqua - 一顆方糖懸滯的時間 [as the sugar cube floats, fleeting in time] (zhu juan, zenless zone zero)
+
+New background using images of all the Hololive Plushies! This was added to give the app a more complete feel to it without the design getting in the way of visibility or performance.
+
+Added a box behind the Total Play Count and Approximate User lines of text to ensure visbility.
+
+💤 emoji tag signifying if a cover comes from the game Zenless Zone Zero.
+
+Regular lyrics for all new songs.
+
+ 
+CHANGED
+
+Made edits to the splash screen. It now reads "FWMC AI RADIO" instead of just "FWMC RADIO" and I cleaned up the overall design a bit, nothing major just filling in some spots that didn't look great to me, evening out colors and lines.
+
+Updated the App Icon to reflect the new change made to the splash screen logo.
+
+Used the text part of the splash screen graphic and added some bau baus, replaced the header of the website with the png graphic instead of just having plain text for a much nicer looking interface upon opening the site.
+
+Total Play Count now says "Total Play Count: 123,456,789" instead of "123,456,789 plays and counting!"
+
+Instead of artist names and song titles all being one line for each song, I have now changed it to appear as three separate lines: Song Title (Blue), VTubers Covering the Song (Pink), Original Artists that Made the Song (Purple). This is meant to provide more clarity and accessibility when looking for specific songs as the titles would sometimes be so long that you couldn't actually see the song name and had to click on it to get the full name or go based off the cover art. This change resolves that issue and does not effect any functionality when it comes to searching, playlisting, etc. as it uses the data already available to separate into these sections. Play count will still display underneath all of this information and should show up uniformly right above the Add to Playlist button for a clean and simple look.
+
+
+KNOWN ISSUES
+
+When you search for a song or artist all the songs that appear will show 0 plays until you click on one, then everything will be updated. It is on my to-do list to fix this issue, but it is a very small one that does not effect any functionality of the site itself. Plays are still counted correctly every time a song is played.
+
+TIPS
+
+You can select the "Search" bar and search for nothing. This will allow you to switch around the order of the main page playlist. This was not something I intentionally did, but rather a little trick I found while messing around with the site that may be useful. It's just built into the search functionality itself because if you search for nothing you are searching for everything.
+
+
 [1.3.4]
 ADDED
+
+*new song* mori calliope - drugs, money, pussy, & beer (yung gravy | ai cover)
+
+*new song* bijou koseki, noko shikanoko - hugs, bunnies, cookies, & deer (yung gravy | ai cover)
+
+*new song* gawr gura - shark's gotta bite (ellen joe, zenless zone zero | ai cover)
 
 *new song* ironmouse, nanashi mumei, mococo abyssgard - love you more (earthgang, t-pain | ai cover)
 
 *new song* gawr gura - say so (doja cat | ai cover by saint)
 
 *new song* ouro kronii - die for you (the weeknd | ai cover by saint)
+
+💮 emoji tag that signifies if a cover was made by saintlysaint from our Discord.
 
 
 [1.3.3]
