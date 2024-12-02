@@ -1,7 +1,7 @@
 const CACHE_NAME = 'fwmc-ai-radio-cache-v1.3.5'; // Update with new version when needed
 const urlsToCache = [
   './',
-  './index.html', // Make sure to include this
+  './index.html',
   './manifest.json',
   './icon-192x192.png',
   './icon-512x512.png',
@@ -16,14 +16,12 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
-  // Tell the new service worker to activate as soon as possible
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   console.log('Service Worker activated');
 
-  // Delete outdated caches
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -37,7 +35,6 @@ self.addEventListener('activate', (event) => {
     })
   );
 
-  // Claim clients to control new navigations immediately
   clients.claim();
 });
 
@@ -45,6 +42,17 @@ self.addEventListener('fetch', (event) => {
   // Exclude DeviceID requests from caching
   if (event.request.url.includes('deviceId')) {
     return fetch(event.request);
+  }
+
+  // Handle shared song links
+  if (event.request.url.includes('?song=')) {
+    event.respondWith(
+      caches.match('./index.html')
+        .then((response) => {
+          return response || fetch('./index.html');
+        })
+    );
+    return;
   }
 
   event.respondWith(
