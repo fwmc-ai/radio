@@ -2588,6 +2588,46 @@ body::before {
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
         {
+          id: "sugar",
+          title: "shiori novella - sugar (brockhampton, davina michelle)",
+          file: "./audio/sugar.mp3",
+          cover: "./images/sugar.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/sugar.txt",
+        },
+
+        {
+          id: "conceited",
+          title: "ironmouse - conceited (lil uzi vert)",
+          file: "./audio/conceited.mp3",
+          cover: "./images/conceited.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/conceited.txt",
+        },
+
+        {
+          id: "chillbae",
+          title: "mococo abyssgard - chill bae (lil uzi vert)",
+          file: "./audio/chillbae.mp3",
+          cover: "./images/chillbae.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/chillbae.txt",
+        },
+
+        {
+          id: "burningdesires",
+          title: "koseki bijou - burning desires (burnice white, zenless zone zero)",
+          file: "./audio/burningdesires.mp3",
+          cover: "./images/burningdesires.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/burningdesires.txt",
+        },
+
+        {
           id: "void",
           title: "mococo abyssgard - void (juice wrld, fwmc-ai x leo_frixi collab)",
           file: "./audio/void.mp3",
@@ -3313,13 +3353,13 @@ body::before {
       const playerContainer = document.querySelector(".player-container");
       const playerContent = document.querySelector(".player-content");
       const backToMainBtn = document.getElementById("backToMainBtn");
+
+      // Song Tags
       const newSongs = [
-        "sharksgottabite",
-        "hbcd",
-        "dmpb",
-        "sugarcube",
-        "zeze",
-        "void",
+        "burningdesires",
+        "chillbae",
+        "conceited",
+        "sugar",
       ];
       const turtleSongs = [
         "anacondas",
@@ -3334,7 +3374,8 @@ body::before {
       ];
       const zzzSongs = [
         "sharksgottabite",
-        "sugarcube"
+        "sugarcube",
+        "burningdesires",
       ];
 
       function togglePlayer() {

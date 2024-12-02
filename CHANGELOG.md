@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.6] 2024-12-02
+ADDED
+
+*new song* shiori novella - sugar (brockhampton, davina michelle)
+
+*new song* ironmouse - conceited (lil uzi vert)
+
+*new song* mococo abyssgard - chill bae (lil uzi vert)
+
+*new song* koseki bijou - burning desires (burnice white, zenless zone zero)
+
+
 [1.3.5] 2024-10-20
 ADDED
 
