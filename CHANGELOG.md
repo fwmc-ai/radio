@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.71] 2024-12-03
+App Refresh.
+
+
 [1.3.7] 2024-12-03
 ADDED
 
