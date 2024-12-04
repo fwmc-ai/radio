@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.7] 2024-12-03
+ADDED
+
+*new song* Ceres Fauna - Little Saplings (FWMC-AI Original Song)
+
+*new song* FUWAMOCO - In FWMC We Trust (FWMC-AI Original Song)
+
+
 [1.3.6] 2024-12-02
 ADDED
 
