@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.8] 2024-12-05
+ADDED
+
+*new song* shiori novella, koseki bijou - stranger at the table (chance the rapper, jeremih)
+
+*new song* amelia watson, gawr gura - snowed in (chance the rapper, jeremih)
+
+*new song* Ceres Fauna - Little Saplings [Studio Version] (FWMC-AI Original Song)
+
+
 [1.3.71] 2024-12-03
 App Refresh.
 
@@ -10,7 +20,7 @@ App Refresh.
 [1.3.7] 2024-12-03
 ADDED
 
-*new song* Ceres Fauna - Little Saplings (FWMC-AI Original Song)
+*new song* Ceres Fauna - Little Saplings [Karaoke Version] (FWMC-AI Original Song)
 
 *new song* FUWAMOCO - In FWMC We Trust (FWMC-AI Original Song)
 
