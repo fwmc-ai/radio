@@ -3,10 +3,16 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.83] 2024-12-05
+CHANGED
+
+Updated "snowed in" audio file, cleaner mix.
+
+
 [1.3.82] 2024-12-05
 FIXED
 
-snowed in not playing properly.
+"snowed in" not playing properly.
 
 
 [1.3.81] 2024-12-05
