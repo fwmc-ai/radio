@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.9] 2024-12-09
+ADDED
+
+*new song* kai cenat, ironmouse - bustdown rollie avalanche (FWMC-AI Original Remix)
+
+*new song* FUWAMOCO - MOE MOE BAU! (FWMC-AI Original Song)
+
+
 [1.3.83] 2024-12-05
 CHANGED
 
