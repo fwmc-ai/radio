@@ -9,14 +9,14 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.83" />
+    <link rel="manifest" href="./manifest.json?v=1.3.9" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.83"
+      href="./icon-192x192.png?v=1.3.9"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.83" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.9" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2506,7 +2506,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.83";
+        const version = localStorage.getItem("appVersion") || "1.3.9";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2586,6 +2586,26 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        {
+          id: "BRA",
+          title: "kai cenat, ironmouse - bustdown rollie avalanche (FWMC-AI Original Remix)",
+          file: "./audio/BRA.mp3",
+          cover: "./images/BRA.jpg",
+          plays: 0,
+          category: "original",
+          lyrics: "./lyrics/BRA.txt",
+        },
+
+        {
+          id: "moemoebau",
+          title: "FUWAMOCO - MOE MOE BAU! (FWMC-AI Original Song)",
+          file: "./audio/moemoebau.mp3",
+          cover: "./images/moemoebau.jpg",
+          plays: 0,
+          category: "original",
+          lyrics: "./lyrics/moemoebau.txt",
+        },
+
         {
           id: "strangeratthetable",
           title: "shiori novella, koseki bijou - stranger at the table (chance the rapper, jeremih)",
