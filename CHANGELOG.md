@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.92] 2024-12-09
+ADDED
+
+*new song* fuwamoco - squabble up (kendrick lamar | ai cover)
+
+
 [1.3.9] 2024-12-09
 ADDED
 
