@@ -8,15 +8,16 @@
       window.obfuscatedFirebaseConfig = "ZDt7ZG1cdwwqNzguWQ95dGpWa-V-fPIaUfTaVlp6cuVrL2g5U3xbTD9kUQZaBF9lUSIEoRB68V5M1vZIfERaoyU7fGNpdD8UYSBoDnQcdwpyYlajVHL2T0bz6kB8XUSvfHZ3Nig1YgdnZ38MZDx8BSkwQPpfeKlLTb_rRHlEW6x-aWo2KDVhAWd_ewh1N21EeHdSrwg54l1J8bREdABG4HtwdTllZ2JbaX1qHGAabAlwfUuvHjnpT1fh-EJ0Q1PSend-cXZedlcyLytcJEMvHyUjHrkAKqYGBvPpVVRJFrs9KCAlNyMkQjA7K1ckRykdZHdEt1N65RkVpKERf0sGsCZ8fCc9JncWP244QzIYfUZgZ1ToX37qXm32ux8_ahnPK1otR1NaRSUwLzZNdBRsRnFzVehnScgIHrDxUWldR7swNnxjaXQ_FGEgaA50HHcKcmJWoFZ-4ktR_u0Ib1lQ4zF_c2ZhdXMGbWR1QXMadQVu";
     </script>
     <meta charset="UTF-8" />
+    <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs. Featuring VTubers from various communities such as Hololive, VShojo, indie, and so on, with a diverse mix of genres including hip hop, rap, pop, acoustic, country, R&B, and more. A PWA app connecting music and VTuber lovers across platforms.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.92" />
+    <link rel="manifest" href="./manifest.json?v=1.3.93" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.92"
+      href="./icon-192x192.png?v=1.3.93"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.92" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.93" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2506,7 +2507,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.92";
+        const version = localStorage.getItem("appVersion") || "1.3.93";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2586,6 +2587,16 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        {
+          id: "bauncin",
+          title: "hololive English -Advent- - BAUNCIN (FWMC-AI Original Cypher)",
+          file: "./audio/bauncin.mp3",
+          cover: "./images/bauncin.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/bauncin.txt",
+        },
+
         {
           id: "squabbleup",
           title: "fuwamoco - squabble up (kendrick lamar)",
@@ -3436,6 +3447,7 @@ body::before {
       // Song Tags
       const newSongs = [
         "squabbleup",
+        "bauncin",
       ];
       const turtleSongs = [
         "anacondas",
