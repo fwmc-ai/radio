@@ -3,7 +3,15 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-[1.3.92] 2024-12-09
+[1.3.93] 2025-01-24
+ADDED
+
+Site description.
+
+*new song* hololive English -Advent- - BAUNCIN (FWMC-AI Original Cypher)
+
+
+[1.3.92] 2025-01-17
 ADDED
 
 *new song* fuwamoco - squabble up (kendrick lamar | ai cover)
