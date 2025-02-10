@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.94] 2025-01-24
+ADDED
+
+*new song* Ceres Fauna - Little Saplings (K-tenchi Remix)
+
+
 [1.3.93] 2025-01-24
 ADDED
 
