@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[1.3.96] 2025-02-28
+ADDED
+
+*new song* holo advent - valentine freestyle (juice wrld)
+
+
 [1.3.94] 2025-01-24
 ADDED
 
