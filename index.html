@@ -11,14 +11,14 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.3.95" />
+    <link rel="manifest" href="./manifest.json?v=1.3.97" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.3.95"
+      href="./icon-192x192.png?v=1.3.97"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.95" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.3.97" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2508,7 +2508,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.3.95";
+        const version = localStorage.getItem("appVersion") || "1.3.97";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2588,6 +2588,16 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        {
+          id: "demondogsktenshi",
+          title: "FUWAMOCO - Demon Dogs [K-tenshi Remix] (FWMC-AI, K-tenshi)",
+          file: "./audio/demondogsktenshi.mp3",
+          cover: "./images/demondogsktenshi.jpg",
+          plays: 0,
+          category: "remix",
+          lyrics: "./lyrics/demondogsktenshi.txt",
+        },
+
         {
           id: "valentine",
           title: "holo advent - valentine freestyle (juice wrld)",
@@ -3467,8 +3477,7 @@ body::before {
 
       // Song Tags
       const newSongs = [
-        "littlesaplingsktenshi",
-        "valentine",
+        "demondogsktenshi",
       ];
       const turtleSongs = [
         "anacondas",
@@ -3485,6 +3494,10 @@ body::before {
         "sharksgottabite",
         "sugarcube",
         "burningdesires",
+      ];
+      const KtenshiSongs = [
+        "littlesaplingsktenshi",
+        "demondogsktenshi"
       ];
 
       function togglePlayer() {
@@ -3912,6 +3925,7 @@ body::before {
         ${turtleSongs.includes(song.id) ? '<span class="song-tag turtle-tag">🐢</span>' : ""}
         ${saintSongs.includes(song.id) ? '<span class="song-tag turtle-tag">💮</span>' : ""}
         ${zzzSongs.includes(song.id) ? '<span class="song-tag turtle-tag">💤</span>' : ""}
+        ${KtenshiSongs.includes(song.id) ? '<span class="song-tag turtle-tag">👼🏽</span>' : ""}
         <div class="song-info-container">
             <p class="song-title">${songTitle}</p>
             <p class="cover-artists">${coverArtists}</p>
