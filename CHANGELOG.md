@@ -3,7 +3,15 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
-[1.3.97] 2025-02-28
+[1.3.98] 2025-03-15
+ADDED
+
+*new song* gawr gura, nanashi mumei - drivers license (olivia rodrigo)
+
+*new song* fuwamoco - diablo (mac miller)
+
+
+[1.3.97] 2025-03-09
 ADDED
 
 *new remix* FUWAMOCO - Demon Dogs (K-Tenshi Remix)
