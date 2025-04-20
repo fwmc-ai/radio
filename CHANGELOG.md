@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.0] 2025-04-19
+
+*new song* gawr gura - somewhere over the rainbow (israel kamakawiwo'ole, lara samira)
+
+
 [1.3.99] 2025-03-15
 ADDED
 
