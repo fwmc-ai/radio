@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.03] 2025-04-24
+
+*new song* fuwamoco - luther (kendrick lamar, sza)
+
 
 [v1.4.01] 2025-04-20
 
