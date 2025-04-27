@@ -10,14 +10,14 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.4.04" />
+    <link rel="manifest" href="./manifest.json?v=1.4.05" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.4.04"
+      href="./icon-192x192.png?v=1.4.05"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.04" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.05" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2507,7 +2507,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.4.04";
+        const version = localStorage.getItem("appVersion") || "1.4.05";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2587,6 +2587,16 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        {
+          id: "cups",
+          title: "erb, irys, gawr gura, amelia watson, nanashi mumei, hakos baelz - cups [when i'm gone] (anna kendrick)",
+          file: "./audio/cups.mp3",
+          cover: "./images/cups.jpg",
+          plays: 0,
+          category: "cover",
+          lyrics: "./lyrics/cups.txt",
+        },
+
         {
           id: "luther",
           title: "fuwamoco - luther (kendrick lamar, sza)",
@@ -3540,6 +3550,7 @@ body::before {
         "somewhereovertherainbow",
         "goodbyes",
         "luther",
+        "cups"
       ];
       const turtleSongs = [
         "anacondas",
