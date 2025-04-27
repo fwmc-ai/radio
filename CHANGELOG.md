@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.05] 2025-04-27
+
+*new song* elizabeth rose bloodflame, irys, gawr gura, amelia watson, nanashi mumei, hakos baelz - cups [when i'm gone] (anna kendrick)
+
+
 [v1.4.03] 2025-04-24
 
 *new song* fuwamoco - luther (kendrick lamar, sza)
