@@ -1,6 +1,6 @@
 {
   "name": "radio",
-  "version": "1.4.06",
+  "version": "1.4.07",
   "main": "service-worker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
