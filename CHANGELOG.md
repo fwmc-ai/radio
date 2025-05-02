@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.09] 2025-05-02
+
+*new song* fuwamoco, hatsune miku - fe!n (travis scott, sheck wes, kemicol)
+
+
 [v1.4.06] 2025-04-29
 
 *new song* gawr gura - the a team (ed sheeran, daniela andrade)
