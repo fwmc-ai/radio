@@ -10,27 +10,31 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.4.11" />
+    <link rel="manifest" href="./manifest.json?v=1.4.12" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.4.11"
+      href="./icon-192x192.png?v=1.4.12"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.11" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.12" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="theme-color" content="#3498db" />
+    <!-- Cache control for iOS -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline' https://www.gstatic.com https://*.firebaseio.com https://*.firebase.com https://*.googleapis.com; connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com; object-src 'self';"
     />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
     <audio
       id="audioPlayer"
@@ -1582,15 +1586,26 @@ body::before {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
         height: 100vh;
         height: 100dvh; /* Dynamic viewport height for mobile browsers */
+        /* Extend into safe areas for iOS notch and home indicator */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        margin: 0;
         background-color: #fce2d9;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 9998;
         transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        /* Ensure it covers everything including iOS UI */
+        min-height: -webkit-fill-available;
+        overflow: hidden;
       }
 
       .splash-content {
@@ -2495,8 +2510,27 @@ body::before {
                 localStorage.setItem("userPlaylists", userPlaylists);
               }
 
+              // Clear all caches (especially important for iOS)
+              if ('caches' in window) {
+                caches.keys().then(function(names) {
+                  for (let name of names) caches.delete(name);
+                });
+              }
+
+              // Unregister service worker to force fresh install
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for(let registration of registrations) {
+                    registration.unregister();
+                  }
+                });
+              }
+
               alert("A new version is available. The page will now refresh.");
-              window.location.reload(true);
+              // Use location.replace for iOS to force full reload
+              setTimeout(() => {
+                window.location.replace(window.location.href.split('?')[0] + '?v=' + data.version);
+              }, 500);
             }
           })
           .catch((error) => {
@@ -2508,7 +2542,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.4.11";
+        const version = localStorage.getItem("appVersion") || "1.4.12";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -7772,6 +7806,29 @@ function hideLyrics() {
       window.addEventListener("beforeunload", function () {
         sessionStorage.removeItem("appOpened");
         // We're not clearing localStorage here, so it remembers across sessions
+      });
+
+      // Handle iOS PWA app resuming - pageshow fires every time app is shown
+      window.addEventListener("pageshow", function (event) {
+        // Check if page was restored from cache (iOS PWA behavior)
+        if (event.persisted || performance.navigation.type === 2) {
+          sessionStorage.removeItem("appOpened");
+        }
+      });
+
+      // Additional handler for iOS PWA visibility - clear session when app returns from background
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden && window.matchMedia('(display-mode: standalone)').matches) {
+          // In standalone mode (PWA) and app just became visible
+          const timeSinceLastVisible = Date.now() - (parseInt(sessionStorage.getItem("lastHidden")) || 0);
+          // If more than 3 seconds passed, treat as new session
+          if (timeSinceLastVisible > 3000) {
+            sessionStorage.removeItem("appOpened");
+          }
+        } else if (document.hidden) {
+          // Store when app was hidden
+          sessionStorage.setItem("lastHidden", Date.now().toString());
+        }
       });
 
       // Register service worker
