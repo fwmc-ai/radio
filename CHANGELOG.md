@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.13] 2025-10-25
+
+*new song* Burnice White, Ellen Joe, Nicole Demara - ZZZypher 1 (FWMC-AI Original Cypher)
+
+[v1.4.12] 2025-10-12
+
+*new song* mococo abyssgard - yessir (lil uzi vert)
+
 [v1.4.09] 2025-05-02
 
 *new song* fuwamoco, hatsune miku - fe!n (travis scott, sheck wes, kemicol)
