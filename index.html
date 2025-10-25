@@ -10,14 +10,14 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.4.12" />
+    <link rel="manifest" href="./manifest.json?v=1.4.13" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.4.12"
+      href="./icon-192x192.png?v=1.4.13"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.12" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.13" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2542,7 +2542,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.4.12";
+        const version = localStorage.getItem("appVersion") || "1.4.13";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2622,6 +2622,16 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        {
+          id: "zzzypher1",
+          title: "Burnice White, Ellen Joe, Nicole Demara - ZZZypher 1 (FWMC-AI Original Cypher)",
+          file: "./audio/zzzypher1.mp3",
+          cover: "./images/zzzypher1.jpg",
+          plays: 0,
+          category: "original",
+          lyrics: "./lyrics/zzzypher1.txt",
+        },
+
         {
           id: "yessir",
           title: "mococo abyssgard - yessir (lil uzi vert)",
@@ -3612,6 +3622,7 @@ body::before {
       // Song Tags
       const newSongs = [
         "yessir",
+        "zzzypher1",
       ];
       const turtleSongs = [
         "anacondas",
@@ -3628,6 +3639,7 @@ body::before {
         "sharksgottabite",
         "sugarcube",
         "burningdesires",
+        "zzzypher1",
       ];
       const KtenshiSongs = [
         "littlesaplingsktenshi",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fwmc-ai-radio-cache-v1.4.12';
+const CACHE_NAME = 'fwmc-ai-radio-cache-v1.4.13';
 const urlsToCache = [
   './',
   './index.html',
