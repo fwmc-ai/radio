@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.14] 2025-10-25
+
+*new song* FUWAMOCO - PC Off (Kendrick Lamar)
+
 [v1.4.13] 2025-10-25
 
 *new song* Burnice White, Ellen Joe, Nicole Demara - ZZZypher 1 (FWMC-AI Original Cypher)
