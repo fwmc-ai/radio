@@ -10,14 +10,14 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.4.13" />
+    <link rel="manifest" href="./manifest.json?v=1.4.14" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.4.13"
+      href="./icon-192x192.png?v=1.4.14"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.13" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.14" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2542,7 +2542,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.4.13";
+        const version = localStorage.getItem("appVersion") || "1.4.14";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -2622,6 +2622,17 @@ body::before {
       const playlist = [
         // Playlist items here
         // New Songs Here - This Will Ensure They Are Shown First
+        
+        {
+          id: "pcoff",
+          title: "FUWAMOCO - PC Off (Kendrick Lamar)",
+          file: "./audio/pcoff.mp3",
+          cover: "./images/pcoff.jpg",
+          plays: 0,
+          category: "remix",
+          lyrics: "./lyrics/pcoff.txt",
+        },
+
         {
           id: "zzzypher1",
           title: "Burnice White, Ellen Joe, Nicole Demara - ZZZypher 1 (FWMC-AI Original Cypher)",
@@ -3623,6 +3634,7 @@ body::before {
       const newSongs = [
         "yessir",
         "zzzypher1",
+        "pcoff",
       ];
       const turtleSongs = [
         "anacondas",
