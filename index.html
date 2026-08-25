@@ -10,14 +10,14 @@
     <meta charset="UTF-8" />
     <meta name="description" content="FWMC-AI RADIO: The #1 Streaming Service for AI VTuber Covers and Original Songs.">
     <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="manifest" href="./manifest.json?v=1.4.14" />
+    <link rel="manifest" href="./manifest.json?v=1.4.15" />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="./icon-192x192.png?v=1.4.14"
+      href="./icon-192x192.png?v=1.4.15"
     />
-    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.14" />
+    <link rel="apple-touch-icon" href="./icon-192x192.png?v=1.4.15" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap" rel="stylesheet">
@@ -2542,7 +2542,7 @@ body::before {
 
       // Cache Busting
       function cacheBustAssets() {
-        const version = localStorage.getItem("appVersion") || "1.4.14";
+        const version = localStorage.getItem("appVersion") || "1.4.15";
         const scripts = document.querySelectorAll("script[src]");
         const links = document.querySelectorAll('link[rel="stylesheet"][href]');
 
@@ -4788,9 +4788,14 @@ body::before {
           );
         })
         .finally(() => {
-          refreshButton.disabled = false;
-          refreshButton.innerHTML =
-            '<i class="fas fa-sync-alt"></i> Refresh Playlists';
+          // FIX (2026-08-25): refreshButton was scoped to another function; referencing it
+          // here threw ReferenceError a few seconds after load. Resolve locally + null-guard.
+          const refreshButton = document.getElementById("refreshPlaylistsBtn");
+          if (refreshButton) {
+            refreshButton.disabled = false;
+            refreshButton.innerHTML =
+              '<i class="fas fa-sync-alt"></i> Refresh Playlists';
+          }
         });
 
       function displayPlaylists(forceRefresh = false) {
@@ -5669,6 +5674,7 @@ function updatePlayPauseButton() {
   audioPlayer
     .play()
     .then(() => {
+      consecutivePlayFailures = 0;
       userPaused = false;
       updateSongInfo(song);
       updatePlayPauseButton();
@@ -5732,13 +5738,35 @@ function updatePlayPauseButton() {
         playPauseBtn.classList.toggle("active", !audioPlayer.paused);
       }
 
+      let consecutivePlayFailures = 0;
+
+      // FIX (2026-08-25): updateLyricsPlayPauseButton was refactored into updatePlayPauseButton
+      // (which now updates both the main and lyrics-modal buttons), but two init() listeners
+      // still called the old name, throwing ReferenceError on every play/pause on desktop.
+      // Restored as a thin alias so any remaining callers work.
+      function updateLyricsPlayPauseButton() {
+        updatePlayPauseButton();
+      }
+
       // Handle audio playback errors
       function handleAudioError(e) {
         console.error("Audio playback error:", e);
-        if (e.name === "NotAllowedError") {
+        // FIX (2026-08-25): an AbortError just means this play() was superseded by a newer
+        // load (e.g. the user clicked another song). Treating it as a failure caused an
+        // auto-skip storm: skip -> abort -> skip through the whole catalog, freezing the tab.
+        if (e && e.name === "AbortError") {
+          return;
+        }
+        if (e && e.name === "NotAllowedError") {
           console.log("Autoplay prevented. User interaction required.");
           showPlayPrompt();
         } else {
+          // Guard: never let error-skipping run away through the catalog.
+          consecutivePlayFailures++;
+          if (consecutivePlayFailures >= 5) {
+            console.error("5 consecutive playback failures - stopping auto-skip.");
+            return;
+          }
           playNext();
         }
       }
@@ -6937,6 +6965,7 @@ function updatePlayPauseButton() {
         audioPlayer
           .play()
           .then(() => {
+            consecutivePlayFailures = 0;
             userPaused = false;
             updateSongInfo(song);
             updatePlayPauseButton();

@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+[v1.4.15] 2026-08-25
+
+*bugfix* Restored updateLyricsPlayPauseButton (was refactored away but still called by two play/pause listeners, throwing a ReferenceError on every desktop play/pause).
+*bugfix* Audio error handler now ignores benign AbortErrors (a new song interrupting the old load) and stops auto-skip after 5 consecutive failures - fixes a runaway skip loop that could freeze the tab cycling the whole catalog.
+*bugfix* Refresh Playlists button reference corrected in the refresh cleanup path (ReferenceError shortly after load).
+
 [v1.4.14] 2025-10-25
 
 *new song* FUWAMOCO - PC Off (Kendrick Lamar)
